@@ -1,5 +1,5 @@
 {
-    "name": "Sidney/Latchet",
+    "name": "Sidney/Laravel-5-Latchet",
     "description": "WebSockets with Laravel 5",
     "keywords": [
         "league",
@@ -7,7 +7,7 @@
         "wamp",
         "socket"
     ],
-    "homepage": "https://github.com/thephpSidney/Latchet",
+    "homepage": "https://github.com/Lokielse/Laravel-5-Latchet",
     "license": "MIT",
     "authors": [
         {

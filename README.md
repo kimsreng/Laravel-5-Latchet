@@ -1,4 +1,4 @@
-# Latchet (Laravel 5 Package)
+# Latchet (Laravel 5 Package, WAMP@v1)
 
 ##Important
 
