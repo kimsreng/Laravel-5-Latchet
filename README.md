@@ -182,10 +182,10 @@ Because the server should be constantly running, there's an extra function for e
 Now it gets interesting. With latchet you can register new topics and pass parameters to it:
 
 ```php
-Latchet::topic('chat/room/{roomid}', 'ChatRoomController');
+Latchet::topic('chat/room/{roomid}', APP\Latchet\Topics\ChatRoomController::class);
 ```
 
-And in the topic handler (e.g. `app/socket/ChatRoomController.php`):
+And in the topic handler (e.g. `app/Latchet/Topics/ChatRoomController.php`):
 
 ```php
 <?php
@@ -193,10 +193,10 @@ use \Sidney\Latchet\BaseTopic;
 
 class ChatRoomController extends BaseTopic {
 
-public function subscribe($connection, $topic, $roomid = null)
+public function subscribe($connection, $topic, $roomId = null)
 {
 	//useful for debuging as this will echo the text in the console
-	echo $roomid;
+	echo $roomId;
 }
 ```
 
@@ -253,23 +253,23 @@ Now that we have our server up and running, we somehow need to connect to it rig
 [Autobahn JS](http://autobahn.ws/js "Autobahn JS") handles the client side for us. Make shure to check their docs, in the meantime, here's a basic example:
 
 ```javascript
-conn = new ab.Session(
-	'ws://latchet.laravel-devbox.dev:1111', // The host (our Latchet WebSocket server) to connect to
-	function() { // Once the connection has been established
-		conn.subscribe('chat/room/lobby', function(topic, event) {
-			console.log('event: ');
-			console.log(event);
-		});
-	},
-	function() {
-		// When the connection is closed
-		console.log('WebSocket connection closed');
-	},
-	{
-		// Additional parameters, we're ignoring the WAMP sub-protocol for older browsers
-		'skipSubprotocolCheck': true
-	}
-);
+	conn = new ab.Session(
+		'ws://latchet.laravel-devbox.dev:1111', // The host (our Latchet WebSocket server) to connect to
+		function() { // Once the connection has been established
+			conn.subscribe('chat/room/lobby', function(topic, event) {
+				console.log('event: ');
+				console.log(event);
+			});
+		},
+		function() {
+			// When the connection is closed
+			console.log('WebSocket connection closed');
+		},
+		{
+			// Additional parameters, we're ignoring the WAMP sub-protocol for older browsers
+			'skipSubprotocolCheck': true
+		}
+	);
 ```
 
 For older browsers, which do not support websockts, make shure to inlcude [web-socket-js](https://github.com/gimite/web-socket-js "web-socket-js") and allow flash in your config file.
