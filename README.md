@@ -67,7 +67,7 @@ Your can config latchet in `.env` file
 LATCHET_SOCKET_PORT=1111
 LATCHET_ENABLE_PUSH=true
 LATCHET_ZMQ_PORT=5555
-//...etc
+...
 ```
 
 The rest of the options should be pretty self self-explanatory.
@@ -98,8 +98,11 @@ Like mentioned before, Latchet is based on Ratchet and just extends its function
 I would really recommend you to read through the [Ratchet docs](http://socketo.me/docs/ "Ratchet docs"). They explain the basic principles very clearly.
 
 Once you get the hang of it, topics are really easy to understand. Imagine a standart laravel route as you know it.
-
-	Route::get('my/route/{parameter}', 'MyController@action');
+```php
+Latchet::topic('http://api.wamp.ws/procedure#authreq', APP\Latchet\Topics\AuthTopic::class);
+Latchet::topic('http://api.wamp.ws/procedure#auth', APP\Latchet\Topics\AuthTopic::class);
+Latchet::topic('hello-topic', APP\Latchet\Topics\HelloTopic::class);
+```
 
 Topics (or if you are familiar with other forms of messaging, channels) are the same for websocket connections.
 There's always a client which subscribes to a topic. If other clients connect to the same topic, they can then broadcast messages to this subscribed topic or a specific client connected to this topic. See how to register a Controller which handles incomming connections in the next chapter.
@@ -152,9 +155,6 @@ If you've ran the above `artisan:generate` command, you'll have a connection han
 
 ```php
 Latchet::connection(APP\Latchet\Connection::class);
-Latchet::topic('http://api.wamp.ws/procedure#authreq', APP\Latchet\Topics\AuthTopic::class);
-Latchet::topic('http://api.wamp.ws/procedure#auth', APP\Latchet\Topics\AuthTopic::class);
-Latchet::topic('hello-topic', APP\Latchet\Topics\HelloTopic::class);
 ```
 
 It handles the following actions:
@@ -253,23 +253,23 @@ Now that we have our server up and running, we somehow need to connect to it rig
 [Autobahn JS](http://autobahn.ws/js "Autobahn JS") handles the client side for us. Make shure to check their docs, in the meantime, here's a basic example:
 
 ```javascript
-	conn = new ab.Session(
-		'ws://latchet.laravel-devbox.dev:1111', // The host (our Latchet WebSocket server) to connect to
-		function() { // Once the connection has been established
-			conn.subscribe('chat/room/lobby', function(topic, event) {
-				console.log('event: ');
-				console.log(event);
-			});
-		},
-		function() {
-			// When the connection is closed
-			console.log('WebSocket connection closed');
-		},
-		{
-			// Additional parameters, we're ignoring the WAMP sub-protocol for older browsers
-			'skipSubprotocolCheck': true
-		}
-	);
+conn = new ab.Session(
+	'ws://latchet.laravel-devbox.dev:1111', // The host (our Latchet WebSocket server) to connect to
+	function() { // Once the connection has been established
+		conn.subscribe('chat/room/lobby', function(topic, event) {
+			console.log('event: ');
+			console.log(event);
+		});
+	},
+	function() {
+		// When the connection is closed
+		console.log('WebSocket connection closed');
+	},
+	{
+		// Additional parameters, we're ignoring the WAMP sub-protocol for older browsers
+		'skipSubprotocolCheck': true
+	}
+);
 ```
 
 For older browsers, which do not support websockts, make shure to inlcude [web-socket-js](https://github.com/gimite/web-socket-js "web-socket-js") and allow flash in your config file.
