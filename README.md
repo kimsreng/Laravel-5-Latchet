@@ -182,16 +182,18 @@ Because the server should be constantly running, there's an extra function for e
 Now it gets interesting. With latchet you can register new topics and pass parameters to it:
 
 ```php
-Latchet::topic('chat/room/{roomid}', APP\Latchet\Topics\ChatRoomController::class);
+Latchet::topic('chat/room/{roomId}', APP\Latchet\Topics\ChatRoomTopic::class);
 ```
 
-And in the topic handler (e.g. `app/Latchet/Topics/ChatRoomController.php`):
+And in the topic handler (e.g. `app/Latchet/Topics/ChatRoomTopic.php`):
 
 ```php
 <?php
+namespace APP\Latchet\Topics;
+
 use \Sidney\Latchet\BaseTopic;
 
-class ChatRoomController extends BaseTopic {
+class ChatRoomTopic extends BaseTopic {
 
 public function subscribe($connection, $topic, $roomId = null)
 {
