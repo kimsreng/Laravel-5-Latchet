@@ -118,7 +118,7 @@ To clarify stuff:
 * subscribe
 * publish
 * call
-* unsubscribe
+* unSubscribe
 
 #### Generate files - the artisan way
 
