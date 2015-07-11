@@ -20,14 +20,8 @@ Latchet::topic('chat/room/{roomid}', APP\Latchet\Topics\ChatRoomTopic::class);
 Until i submit the pakage to packagist, include it directly from github.
 
 ```json
-"repositories": [
-	{
-		"type": "vcs",
-		"url": "https://github.com/lokielse/Larvel-5-Latchet"
-	}
-],
 "require": {
-	"sidney/latchet": "2.*"
+	"sidney/latchet-5-latchet": "2.*"
 }
 ```
 
@@ -36,7 +30,7 @@ Until i submit the pakage to packagist, include it directly from github.
 In the `require` key of `composer.json` file add the following
 
 ```
-"sidney/latchet": "2.*"
+"sidney/latchet-5-latchet": "2.*"
 ```
 
 Run the Composer update comand
