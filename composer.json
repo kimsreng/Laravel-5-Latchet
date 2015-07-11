@@ -1,6 +1,14 @@
 {
-    "name": "sidney/latchet",
-    "description": "WebSockets with Laravel 4",
+    "name": "Sidney/Latchet",
+    "description": "WebSockets with Laravel 5",
+    "keywords": [
+        "league",
+        "laravel5",
+        "wamp",
+        "socket"
+    ],
+    "homepage": "https://github.com/thephpSidney/Latchet",
+    "license": "MIT",
     "authors": [
         {
             "name": "Sidney Widmer",
@@ -8,22 +16,31 @@
         }
     ],
     "require": {
+        "illuminate/support": "~5.1",
         "php": ">=5.3.0",
-        "illuminate/support": "4.*",
-        "cboden/Ratchet": "dev-master"
+        "cboden/ratchet": "0.3.*",
+        "react/zmq": "0.2.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.*",
+        "scrutinizer/ocular": "~1.1"
     },
     "autoload": {
-        "classmap": [
-            "src/commands"
-        ],
-        "psr-0": {
-            "Sidney\\Latchet": "src/"
+        "psr-4": {
+            "Sidney\\Latchet\\": "src"
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Sidney\\Latchet\\Test\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
     },
     "extra": {
         "branch-alias": {
             "dev-master": "1.0-dev"
         }
-    },
-    "minimum-stability": "dev"
+    }
 }
