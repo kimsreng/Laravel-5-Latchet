@@ -10,7 +10,7 @@ Latchet takes the hassle out of PHP backed realtime apps. At its base, it's a ex
 
 If you're finished setting up a basic WampServer, you'll have something like this:
 ```
-Latchet::topic('chat/room/{roomid}', APP\Latchet\Topics\ChatRoomTopic);
+Latchet::topic('chat/room/{roomid}', APP\Latchet\Topics\ChatRoomTopic::class);
 ```
 
 ## Installation
